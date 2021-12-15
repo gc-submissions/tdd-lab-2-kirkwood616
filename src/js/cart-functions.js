@@ -10,18 +10,29 @@ function calculateChange(total, payment) {
 }
 
 function isSufficientPayment(total, payment) {
-  if (payment >= total) {
-    return true;
-  }
-  return false;
+  return payment >= total;
 }
 
 function calculateTotal(itemsArray) {
-  return;
+  let total = 0;
+  for (let i = 0; i < itemsArray.length; i++) {
+    total += itemsArray[i].price;
+  }
+  return total;
+}
+
+function addItem(itemsArray, name, price) {
+  itemsArray.push({ name: name, price: price });
+}
+
+function removeItem(itemsArray, index) {
+  itemsArray.splice(index, 1);
 }
 
 module.exports = {
   method1: calculateChange,
   method2: isSufficientPayment,
   method3: calculateTotal,
+  method4: addItem,
+  method5: removeItem,
 };
