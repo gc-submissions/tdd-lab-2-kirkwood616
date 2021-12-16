@@ -1,54 +1,54 @@
 const {
-  method1,
-  method2,
-  method3,
-  method4,
-  method5,
+  calculateChange,
+  isSufficientPayment,
+  calculateTotal,
+  addItem,
+  removeItem,
 } = require("../src/js/cart-functions");
 
 ///////////// CALCULATE CHANGE: METHOD 1
 describe("calculateChange", () => {
   test("Change", function () {
-    expect(method1(5, 6)).toEqual(1);
+    expect(calculateChange(5, 6)).toEqual(1);
   });
 
   test("Change", function () {
-    expect(method1(12.3, 13.03)).toEqual(0.73);
+    expect(calculateChange(12.3, 13.03)).toEqual(0.73);
   });
 
   test("Change", function () {
-    expect(method1(20, 37)).toEqual(17);
+    expect(calculateChange(20, 37)).toEqual(17);
   });
 });
 
 ///////////// SUFFICIENT PAYMENT: METHOD 2
 describe("isSufficientPayment", () => {
   test("Is payment enough to cover total", function () {
-    expect(method2(5, 6)).toBe(true);
+    expect(isSufficientPayment(5, 6)).toBe(true);
   });
 
   test("Is payment enough to cover total", function () {
-    expect(method2(10, 7)).toBe(false);
+    expect(isSufficientPayment(10, 7)).toBe(false);
   });
 
   test("Is payment enough to cover total", function () {
-    expect(method2(3, 3)).toBe(true);
+    expect(isSufficientPayment(3, 3)).toBe(true);
   });
 
   test("Is payment enough to cover total", function () {
-    expect(method2(10.75, 9.85)).toBe(false);
+    expect(isSufficientPayment(10.75, 9.85)).toBe(false);
   });
 });
 
 ///////////// CALCULATE TOTAL: METHOD 3
 describe("calculateTotal", () => {
   test("Total price of array of objects", function () {
-    expect(method3([{ name: "Item1", price: 4.99 }])).toBeCloseTo(4.99);
+    expect(calculateTotal([{ name: "Item1", price: 4.99 }])).toBeCloseTo(4.99);
   });
 
   test("Total price of array of objects", function () {
     expect(
-      method3([
+      calculateTotal([
         { name: "Item1", price: 3.5 },
         { name: "Item2", price: 12.99 },
         { name: "Item3", price: 0.03 },
@@ -57,12 +57,12 @@ describe("calculateTotal", () => {
   });
 
   test("Total price of array of objects", function () {
-    expect(method3([])).toEqual(0);
+    expect(calculateTotal([])).toEqual(0);
   });
 
   test("Total price of array of objects", function () {
     expect(
-      method3([
+      calculateTotal([
         { name: "Item1", price: 3.5 },
         { name: "Item2", price: 12.99 },
       ])
@@ -74,13 +74,13 @@ describe("calculateTotal", () => {
 describe("addItem", () => {
   test("Adding 1 item to an empty array", function () {
     let results = [];
-    method4(results, "Beans", 3);
+    addItem(results, "Beans", 3);
     expect(results).toEqual([{ name: "Beans", price: 3 }]);
   });
 
   test("Adding 1 item to an array with 1 item", function () {
     let results = [{ name: "Beans", price: 3 }];
-    method4(results, "Sugar", 2);
+    addItem(results, "Sugar", 2);
     expect(results).toEqual([
       { name: "Beans", price: 3 },
       { name: "Sugar", price: 2 },
@@ -93,7 +93,7 @@ describe("addItem", () => {
       { name: "Sugar", price: 2 },
       { name: "Beef", price: 10 },
     ];
-    method4(results, "Green Onion", 1);
+    addItem(results, "Green Onion", 1);
     expect(results).toEqual([
       { name: "Beans", price: 3 },
       { name: "Sugar", price: 2 },
@@ -111,7 +111,7 @@ describe("removeItem", () => {
       { name: "Sugar", price: 2 },
       { name: "Beef", price: 10 },
     ];
-    method5(results, 0);
+    removeItem(results, 0);
     expect(results).toEqual([
       { name: "Sugar", price: 2 },
       { name: "Beef", price: 10 },
@@ -124,7 +124,7 @@ describe("removeItem", () => {
       { name: "Sugar", price: 2 },
       { name: "Beef", price: 10 },
     ];
-    method5(results, 2);
+    removeItem(results, 2);
     expect(results).toEqual([
       { name: "Beans", price: 3 },
       { name: "Sugar", price: 2 },
@@ -137,7 +137,7 @@ describe("removeItem", () => {
       { name: "Sugar", price: 2 },
       { name: "Beef", price: 10 },
     ];
-    method5(results, 1);
+    removeItem(results, 1);
     expect(results).toEqual([
       { name: "Beans", price: 3 },
       { name: "Beef", price: 10 },
@@ -146,7 +146,7 @@ describe("removeItem", () => {
 
   test("Remove last item from the array", function () {
     let results = [{ name: "Beans", price: 3 }];
-    method5(results, 0);
+    removeItem(results, 0);
     expect(results).toEqual([]);
   });
 });

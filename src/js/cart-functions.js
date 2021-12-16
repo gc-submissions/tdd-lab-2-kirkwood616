@@ -30,9 +30,9 @@ function removeItem(itemsArray, index) {
 }
 
 module.exports = {
-  method1: calculateChange,
-  method2: isSufficientPayment,
-  method3: calculateTotal,
-  method4: addItem,
-  method5: removeItem,
+  calculateChange,
+  isSufficientPayment,
+  calculateTotal,
+  addItem,
+  removeItem,
 };
